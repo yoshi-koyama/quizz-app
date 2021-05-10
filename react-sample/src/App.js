@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// import './styles/settings/common/globals.scss'
-// import './styles/settings/common/destyle.scss'
 
 export default function App() {
   const questions = [
@@ -80,40 +78,43 @@ export default function App() {
   };
   return (
     <div className='app'>
-      {showScore ? (
-        <div className='score-section'>
-          You scored {score} out of {questions.length}
-        </div>
-      ) : (
-        <>
-          <div className="inner">
-            <div className='question-section'>
-              <div className='question-count'>
-                <span>Question {currentQuestion + 1}</span>/{questions.length}
-              </div>
-              <div className='question-text'>{questions[currentQuestion].questionText}</div>
+      <div className="question">
+        <div className="question__inner">
+          {showScore ? (
+            <div className='score-section'>
+              You scored {score} out of {questions.length}
             </div>
-            <div className='answer-section'>
-              {questions[currentQuestion].answerOptions.map((answerOption, index) => (
-                <button key={index} onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>{answerOption.answerText}</button>
-              ))}
-            </div>
-          </div>
-            {!correct.hidden && 
-              (
-                <div className='overlay'>
-                  <div className="iconWrapper">
-                    {correct.correct ?(
-                      <div className='correct'></div>
-                    ) : (
-                      <div className='incorrect'></div>
-                    )}
+          ) : (
+            <>
+                <div className='question-section'>
+                  <div className='question-count'>
+                    <span>Question {currentQuestion + 1}</span>/{questions.length}
                   </div>
+                  <div className='question-text'>{questions[currentQuestion].questionText}</div>
                 </div>
-              )
-            }
-        </>
-      )}
+                <div className='answer-section'>
+                  {questions[currentQuestion].answerOptions.map((answerOption, index) => (
+                    <button key={index} onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>{answerOption.answerText}</button>
+                  ))}
+                </div>
+              
+                {!correct.hidden && 
+                  (
+                    <div className='overlay'>
+                      <div className="iconWrapper">
+                        {correct.correct ?(
+                          <div className='correct'></div>
+                        ) : (
+                          <div className='incorrect'></div>
+                        )}
+                      </div>
+                    </div>
+                  )
+                }
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
